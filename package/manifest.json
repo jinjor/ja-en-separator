@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "minimum_chrome_version": "35.0",
   "manifest_version": 2,
-  "default_locale": "ja_JP",
   "description": "日本語と英語の間に半角スペースを挿入します",
   "background": {
     "scripts": [ "background.js" ],
