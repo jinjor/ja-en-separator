@@ -11,14 +11,21 @@ chrome.runtime.onMessage.addListener(function(e, sender, cb) {
     + '\thttps://github.com/jinjor/ja-en-separator/issues/new'
     );
   }
-  if(e.type == "getText") {
-    cb({ text: typeof element.value === 'string' ? element.value : element.textContent });
-  } else if (e.type == "setText") {
+  if(e.type == "modifyText") {
+    var text = typeof element.value === 'string' ? element.value : element.textContent;
+    var result = text.split(/\r\n|\r|\n/).map(replace).join('\n');
     if(typeof element.value === 'string') {
-      element.value = e.text;
+      element.value = result;
     } else {
-      element.textContent = e.text;
+      element.textContent = result;
     }
     element = null;
   }
 });
+
+function replace(s) {
+  return s
+    .replace(/ ?([^\x01-\x7E]+) ?/g,' $1 ')
+    .replace(/^ /, '')
+    .replace(/ $/, '');
+}
