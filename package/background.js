@@ -1,6 +1,6 @@
 function replace(s) {
   return s
-    .replace(/[\x01-\x7E]+/g,' $& ')
+    .replace(/ ?([^\x01-\x7E]+) ?/g,' $1 ')
     .replace(/^ /, '')
     .replace(/ $/, '');
 }
