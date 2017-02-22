@@ -1,0 +1,33 @@
+<h1>日英分割</h1>
+
+<p>このデモは Chrome 拡張と同じように動きます</p>
+
+<textarea id="text" rows="30"></textarea>
+<div class="button-area"><button id="convert">変換</button></div>
+
+<script>
+document.getElementById('convert').addEventListener('click', function(e) {
+  var textarea = document.getElementById('text');
+  var result = textarea.value.split(/\r\n|\r|\n/).map(replace).join('\n');
+  console.log(result);
+  textarea.value = result;
+});
+function replace(s) {
+  return s
+    .replace(/ ?([^\x01-\x7E]+) ?/g,' $1 ')
+    .replace(/^ /, '')
+    .replace(/ $/, '');
+}
+</script>
+<style>
+textarea {
+  width: 600px;
+}
+.button-area {
+  width: 600px;
+  text-align: center;
+}
+#convert {
+  width: 100px;
+}
+</style>
